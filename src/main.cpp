@@ -136,7 +136,7 @@ int main(int argc, char * argv[])
   basis->setUpChannelMaps();
   if(rank == 0){
     if(verbose >= 1){
-      printf("nChannels: %llu\n", basis->nChannels);
+      printf("nChannels: %zu\n", basis->nChannels);
     }
   }
 
@@ -671,7 +671,7 @@ int main(int argc, char * argv[])
     }
     if (rank==0){
       if(verbose >= 1){
-        printf("iterations: %d\n", iterations);
+        printf("iterations: %lu\n", iterations);
         printf("corrCCD: %.17g\n", corrCCD);
         printf("energy diff: %.17g\n", energyDiff);
         printf("corrCCD/A: %.17g\n", corrCCD/basis->nParticles);
@@ -691,7 +691,7 @@ int main(int argc, char * argv[])
   cc_time_1 = omp_get_wtime();
   if( rank == 0 ){
     if( verbose >= 0 ){
-      printf("iterations: %d\n", iterations);
+      printf("iterations: %lu\n", iterations);
       printf("CCDCorr: %.17g\n", corrCCD);
       printf("CCDCorr/A: %.17g\n", corrCCD/basis->nParticles);
       printf("E_CCD: %.17g\n", (Eref + corrCCD));
