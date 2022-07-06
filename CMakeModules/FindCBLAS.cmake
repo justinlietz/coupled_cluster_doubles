@@ -1,0 +1,70 @@
+# - Find CBLAS library
+#
+#
+# This module sets the following variables:
+#  CBLAS_FOUND - set to true if a library implementing the CBLAS interface is found
+#  CBLAS_LIBRARIES - list of libraries (using full path name) to link against to use CBLAS
+#  CBLAS_INCLUDE_DIR - path to includes
+#  CBLAS_INCLUDE_FILE - the file to be included to use CBLAS
+#
+
+
+find_package(BLAS)
+
+# Find BLAS doesn't get include files
+SET(CBLAS_LIBRARIES ${BLAS_LIBRARIES})
+
+IF(BLAS_LIBRARIES)
+  SET(CBLAS_FOUND TRUE)
+ELSE(BLAS_LIBRARIES)
+  SET(CBLAS_FOUND FALSE)
+ENDIF(BLAS_LIBRARIES)
+
+find_path(CBLAS_INCLUDE_DIR cblas.h
+  $ENV{BLAS_DIR}/include
+  $ENV{BLASDIR}/include
+  $ENV{OPENBLAS_DIR}/include
+  NO_DEFAULT_PATH
+  )
+
+find_path(CBLAS_INCLUDE_DIR cblas.h
+  /usr/include
+  /usr/local/include
+  )
+
+IF(CBLAS_INCLUDE_DIR)
+  SET(CBLAS_INCLUDE_FILE "cblas.h")
+ENDIF(CBLAS_INCLUDE_DIR)
+
+# CBLAS in Intel mkl
+FIND_PACKAGE(MKL)
+IF (MKL_FOUND AND NOT BLAS_LIBRARIES)
+  SET(CBLAS_LIBRARIES ${MKL_LIBRARIES})
+  SET(CBLAS_INCLUDE_DIR ${MKL_INCLUDE_DIRS})
+  SET(CBLAS_INCLUDE_FILE "mkl_cblas.h")
+ENDIF (MKL_FOUND AND NOT BLAS_LIBRARIES)
+
+# CBLAS in GSL
+FIND_PACKAGE(GSL)
+IF (GSL_FOUND AND NOT BLAS_LIBRARIES)
+  SET(CBLAS_INCLUDE_DIR ${GSL_INCLUDE_DIRS})
+  SET(CBLAS_INCLUDE_FILE "gsl/gsl_cblas.h")
+ENDIF (GSL_FOUND AND NOT BLAS_LIBRARIES)
+
+IF(CBLAS_LIBRARIES)
+  SET(CBLAS_FOUND TRUE)
+ELSE(CBLAS_LIBRARIES)
+  SET(CBLAS_FOUND FALSE)
+ENDIF(CBLAS_LIBRARIES)
+
+IF(NOT CBLAS_FOUND AND CBLAS_FIND_REQUIRED)
+  MESSAGE(FATAL_ERROR "CBLAS library not found. Please specify library location")
+ENDIF(NOT CBLAS_FOUND AND CBLAS_FIND_REQUIRED)
+IF(NOT CBLAS_FIND_QUIETLY)
+  IF(CBLAS_FOUND)
+    MESSAGE(STATUS "CBLAS library found")
+  ELSE(CBLAS_FOUND)
+    MESSAGE(STATUS "CBLAS library not found.")
+  ENDIF(CBLAS_FOUND)
+ENDIF(NOT CBLAS_FIND_QUIETLY)
+

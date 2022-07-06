@@ -1,0 +1,13 @@
+*~
+*.o
+*.obj
+*.mod
+*.a
+*.exe
+CMakeCache.txt
+*.cmake
+CMakeFiles/*
+CMakeFiles/
+Testing/
+Makefile
+core.*

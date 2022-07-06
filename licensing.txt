@@ -1,0 +1,8 @@
+Copyright (c) 2015-2022, Justin Gage Lietz <justingagelietz@gmail.com>
+All rights reserved.
+
+CCD code for arbitrary basis
+Written by Justin Gage Lietz starting in June 2015
+
+Peter Ahrens (MIT) and Stephanie Lauber (SDSU) also contributed to this code
+significantly in 2015.

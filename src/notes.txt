@@ -1,0 +1,55 @@
+// Copyright (c) 2015-2016, Justin Gage Lietz
+// All rights reserved.
+
+***COPYRIGHT STUFF****
+
+Author: Justin Lietz
+Project Start: June 2015
+
+To do:
+If we need more than ~32k SymBlocks, might overflow ints
+Implement block-diagonal Hartree-Fock for 2d quantum dots
+Work on parallelizing everything everywhere all the time.
+Set up vnn more efficiently. Maybe allocate everything, THEN set values.
+Then check that allocate < requested memory.
+Is it worth cutting down on memory? Getting rid of indices?
+Lay the interactions down in contiguous memory?
+cblas to add matrices? parallel/gpu blas?
+It would be nice to remove all references to megaMap from CCDstep
+
+shellMax = 35, PNM
+2281 sp states, 25695 channels, 43 minutes to find all channels.
+
+Add const stuff?
+
+  // This is related to a cool problem in number theory,
+  // I do not want to increment shell if it cannot be represented
+  // by the sum of three squares. MOST numbers can be, except 7, 15, 28...
+  // numbers of the form (4^m)*(8k+7). However,
+  // ALL numbers can be represented by the sum of four squares!
+  // I think this while loop is a good enough solution, since not
+  // many iterations will be wasted. Think harder about an algorithm later.
+
+inheritance:
+class Polygon
+class Rectangle: public Polygon
+Rectangle rect;
+rect gets members from Polygon.
+
+Polymorphism:
+a pointer to a derived class is type-compatible with a pointer to its base class.
+A class that declares or inherits a virtual function is called a polymorphic class.
+
+class Polygon
+virtual int area()
+
+class Rectangle: public Polygon
+int area ()
+
+Rectangle rect;
+Polygon * ppoly1 = &rect;
+// Polygon * ppoly1 = new Rectangle (4,5);
+ppoly1->area()
+
+ppoly1 will use the inherited area from the Rectangle class.
+
